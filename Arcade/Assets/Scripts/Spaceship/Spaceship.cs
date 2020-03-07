@@ -23,7 +23,7 @@ public class Spaceship : MonoBehaviour, IDestructable
     private void OnEnable() // Инициализация компонентов
     {
         _input = new ShipInput();
-        _motor = new SpaceshipMotor(_input, _shipData, rg);
+        _motor = new SpaceshipMotor(_input, _shipData, rg, Direction.UP);
     }
 
     void Update()

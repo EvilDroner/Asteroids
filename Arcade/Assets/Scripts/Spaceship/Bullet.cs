@@ -10,6 +10,14 @@ public class Bullet : MonoBehaviour, IDestructable
     public float MaxLifeTime { set => _maxLifeTime = value; }
     public float Speed { set => _speed = value; }
 
+    public BulletPool BulletPool
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     private void OnEnable() // Инициализация
     {
         _lifeTime = _maxLifeTime;

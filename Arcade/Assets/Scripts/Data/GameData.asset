@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 5032372322852179528, guid: e91af8d62020c9e4d9fab8310da4c2ec,
     type: 3}
-  _lives: 3
-  _timing: 30
-  _count: 4
+  _lives: 5
+  _asteroidTiming: 30
+  _asteroidCount: 4
+  _ufoTiming: 10
+  _ufoCount: 1

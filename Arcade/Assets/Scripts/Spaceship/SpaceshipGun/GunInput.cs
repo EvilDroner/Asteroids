@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class GunInput : IGunInput
+public class SpaceshipGunInput : IGunInput
 {
     private bool _isFire = false;
     public bool IsFire => _isFire;
+
 
     public void ReadInput()
     {

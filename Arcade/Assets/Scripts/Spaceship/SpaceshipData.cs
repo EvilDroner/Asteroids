@@ -17,4 +17,11 @@ public class SpaceshipData : ScriptableObject
     public float TurnSpeed { get => _turnSpeed; }
     public float Drag { get => _drag; }
 
+    public Spaceship Spaceship
+    {
+        get => default;
+        set
+        {
+        }
+    }
 }

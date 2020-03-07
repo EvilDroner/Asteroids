@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public abstract class SoundsList<T> : MonoBehaviour where T : class
 {
     [SerializeField] private SerializableStringAduiClipDictionary _sounds;
+
+    private AudioSource _source;
     private static T _instance;
     public static T Instance
     {
@@ -27,26 +30,22 @@ public abstract class SoundsList<T> : MonoBehaviour where T : class
             }
         }
     }
+
+
     private void Awake()
     {
+        _source = GetComponent<AudioSource>();
         Instance = this as T;
     }
     public void PlaySound(string name) // Воспроизводим аудио
     {
         if (_sounds.ContainsKey(name))
         {
-            SoundManager.Instance.PlaySound(name);
+            _source.PlayOneShot(_sounds[name]);
         }
         else
         {
-            Debug.LogError($"Sounds list of {typeof(T).Name} doesnt have {name} sound in list");
-        }
-    }
-    private void Start() // Добавляем дорожки в основной список
-    {
-        foreach (var sound in _sounds)
-        {
-            SoundManager.Instance.AddSound(sound.Key, sound.Value);
+            Debug.LogError("Trying to play audio wich doesnt exist!");
         }
     }
 }

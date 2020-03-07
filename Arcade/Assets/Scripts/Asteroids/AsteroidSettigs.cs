@@ -34,5 +34,4 @@ public class AsteroidSettings : ScriptableObject
     public float MaxDeflectionAngle { get => _maxDeflectionAngle; }
     public float MinSize { get => _minSize; }
     public float StartSize { get => _startSize; }
-
 }

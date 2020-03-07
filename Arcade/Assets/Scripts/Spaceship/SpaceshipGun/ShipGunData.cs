@@ -15,4 +15,11 @@ public class ShipGunData : ScriptableObject
     public float BulletSpeed { get => _bulletSpeed; }
     public float BulletLifeTime { get => _bulletLifeTime; }
 
+    public SpaceshipGun SpaceshipGun
+    {
+        get => default;
+        set
+        {
+        }
+    }
 }

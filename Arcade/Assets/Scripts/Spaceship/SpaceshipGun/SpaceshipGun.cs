@@ -8,16 +8,17 @@ public class SpaceshipGun : MonoBehaviour
     private IGunInput _input;
     private float _secBeforeShot = 0;
 
+
     private void Awake()
     {
-        _input = new GunInput();
+        _input = new SpaceshipGunInput();
     }
 
     private void Shot()
     {
         Bullet bullet = BulletPool.Instance.Get();
         bullet.transform.position = _barrel.position;
-        bullet.transform.rotation = transform.rotation;
+        bullet.transform.rotation = _barrel.transform.rotation;
         bullet.MaxLifeTime = _data.BulletLifeTime;
         bullet.Speed = _data.BulletSpeed;
         bullet.gameObject.SetActive(true);

@@ -9,7 +9,8 @@ public class GameController : MonoBehaviour
     private int _score = 0;
     private int _livesLeft = 3;
 
-    private TimingAsteroidGenerator _timingGenerator;
+    private TimingAsteroidGenerator _asteroidTimingGenerator;
+    private TimingUFOGenerator _ufoTimingGenerator;
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLivesLeftChanged;
@@ -48,14 +49,17 @@ public class GameController : MonoBehaviour
     }
     private void Start()
     {
-        _timingGenerator = new TimingAsteroidGenerator(RandomPlacedAsteroidGenerator.Instance, _data.Timing, _data.Count);
+        _asteroidTimingGenerator = new TimingAsteroidGenerator(AsteroidGenerator.Instance, _data.AsteroidTiming, _data.AsteroidCount);
+        _ufoTimingGenerator = new TimingUFOGenerator(UFOGenerator.Instance, _data.UFOTiming, _data.UFOCount);
         _player = Instantiate(_data.PlayerPrefab);
-        _timingGenerator.Enable();
+        _asteroidTimingGenerator.Enable();
+        _ufoTimingGenerator.Enable();
         InitNewGame();
     }
     private void Update()
     {
-        _timingGenerator.Tick();
+        _asteroidTimingGenerator.Tick();
+        _ufoTimingGenerator.Tick();
     }
     public void AddScore(int count) // Изменение кол-ва очков
     {

@@ -2,14 +2,14 @@
 
 public class Asteroid : MonoBehaviour, IDestructable
 {
+    [SerializeField] private AsteroidSettings _data;
     public AsteroidSettings Data { set => _data = value; }
 
-    private AsteroidSettings _data;
+    private IReward _reward;
     private AsteroidMotor _motor;
 
     private float _size;
     private int _partsCount;
-    private int _reward;
 
     private float getSize() => transform.localScale.x; 
     private int getScoreReward() => Mathf.RoundToInt(_data.StartReward + (_data.StartSize - _size) * (_data.MaxReward - _data.StartReward)); // Считаем награду в зависимости от размера
@@ -37,9 +37,9 @@ public class Asteroid : MonoBehaviour, IDestructable
             Debug.LogError("No Asteroid Data provided!");
             return;
         }
+
         _size = getSize();
-        _reward = getScoreReward();
-        Debug.Log($"Reward {_reward}");
+        _reward = new ScoreReward(getScoreReward());
         _partsCount = getPartsCount();
         _motor = new AsteroidMotor(transform, getSpeed());
     }
@@ -54,7 +54,7 @@ public class Asteroid : MonoBehaviour, IDestructable
         SpawnParts();
         AsteroidSounds.Instance.PlaySound("Boom");
         ExplosionController.MakeExplosion(transform.position);
-        GameController.Instance.AddScore(_reward);
+        _reward.GiveReward();
         AsteroidPool.Instance.SendToPool(this);
     }
 
@@ -65,7 +65,7 @@ public class Asteroid : MonoBehaviour, IDestructable
             Vector2 newPos = transform.position;
             Vector2 newScale = transform.localScale / _partsCount;
             float newRot = transform.rotation.eulerAngles.z + Random.Range(_data.MinDeflectionAngle, _data.MaxDeflectionAngle);
-            SimpleAsteroidGenerator.Instance.GenAsteroid(newPos, newScale, newRot);
+            AsteroidGenerator.Instance.GenObject(newPos, newScale, newRot);
         }
     }
 }

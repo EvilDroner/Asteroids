@@ -12,6 +12,15 @@ public class AsteroidMotor
         _asteroid = asteroid;
         _speed = speed;
     }
+
+    public Asteroid Asteroid
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     private void Move()
     {
         _asteroid.Translate(_asteroid.up * _speed / 10f * Time.deltaTime);

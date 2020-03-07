@@ -12,6 +12,7 @@ public class HeathGridController : MonoBehaviour
             {
                 var newHealthUI = UIHealthPool.Instance.Get();
                 newHealthUI.transform.SetParent(transform);
+                newHealthUI.transform.localScale = Vector3.one;
                 newHealthUI.gameObject.SetActive(true);
             }
         }

@@ -7,6 +7,7 @@ public class ShipInput : IShipInput
     public float Rotation => _rotation;
     public float Thrust => _thrust;
 
+
     public void ReadInput() // Считываем данные
     {
         _rotation = Input.GetAxis("Horizontal");
